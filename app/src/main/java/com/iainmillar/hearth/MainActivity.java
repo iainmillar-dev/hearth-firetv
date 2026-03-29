@@ -13,6 +13,7 @@ import android.webkit.WebViewClient;
 public class MainActivity extends Activity {
 
     private static final String DISPLAY_URL = "http://192.168.1.175:18880/display";
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class MainActivity extends Activity {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         );
 
-        WebView webView = new WebView(this);
+        webView = new WebView(this);
         webView.setBackgroundColor(Color.parseColor("#0d0906"));
         setContentView(webView);
 
@@ -44,8 +45,11 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-            finish();
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            webView.evaluateJavascript(
+                "document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}))",
+                null
+            );
             return true;
         }
         return super.onKeyDown(keyCode, event);
