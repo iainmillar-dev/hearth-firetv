@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 
 public class MainActivity extends Activity {
 
-    private static final String DISPLAY_URL = "http://192.168.1.175:18880/display";
+    private static final String DISPLAY_URL = "http://192.168.1.101:18880/display";
     private WebView webView;
 
     @Override
